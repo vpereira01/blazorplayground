@@ -21,7 +21,7 @@ jobs:
     - name: Create temp directory
       run: mkdir $GITHUB_SHA
     - name: Move everything to temp directory
-      run: mv !($GITHUB_SHA) $GITHUB_SHA
+      run: mv !(${GITHUB_SHA}) $GITHUB_SHA
     - name: Run publish
       run: dotnet publish -c release -o . $GITHUB_SHA
     - name: Remove temp directory
