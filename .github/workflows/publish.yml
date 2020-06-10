@@ -1,4 +1,4 @@
-name: .NET Core
+name: Publish to GH Pages
 
 on:
   push:
@@ -8,13 +8,16 @@ jobs:
   publish:
 
     runs-on: ubuntu-latest
-
+    
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+    
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.101
+        dotnet-version: 3.1.x
     - name: Run publish
       run: dotnet publish -c release -o .
     - name: ls
