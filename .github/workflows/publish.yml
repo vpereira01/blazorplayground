@@ -18,8 +18,14 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.x
+    - name: Create temp directory
+      run: mkdir $GITHUB_SHA
+    - name: Move everything to temp directory
+      run: mv !($GITHUB_SHA) $GITHUB_SHA
     - name: Run publish
-      run: dotnet publish -c release -o .
+      run: dotnet publish -c release -o . $GITHUB_SHA
+    - name: Remove temp directory
+      run: rm -r $GITHUB_SHA
     - name: ls
       run: ls
     #- name: Push to gh-pages
