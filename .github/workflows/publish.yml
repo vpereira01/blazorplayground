@@ -26,7 +26,7 @@ jobs:
         shopt -s extglob
         mv !($GITHUB_SHA) $GITHUB_SHA
     - name: Run publish
-      run: dotnet publish -c release -o . $GITHUB_SHA
+      run: dotnet publish --nologo -c release -o . $GITHUB_SHA
     - uses: actions/checkout@v2
       with:
         ref: gh-pages
