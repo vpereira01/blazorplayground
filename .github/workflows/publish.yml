@@ -33,12 +33,15 @@ jobs:
     #  run: mv wwwroot/* .
     #- name: Remove extra files
     #  run: rm -r web.config wwwroot
+    - uses: actions/checkout@v2
+      with:
+        ref: gh-pages
+        path: gh-pages
     - name: ls
       run: ls
     - name: git things
       run: |
-        mkdir gh-pages
         cd gh-pages
-        git checkout gh-pages
         mv ../wwwroot/* .
         git commit -m "Add changes" -a
+        git push
