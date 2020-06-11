@@ -35,7 +35,7 @@ jobs:
       run: rsync -a wwwroot/ gh-pages/
     - name: Prepare commit message
       run: |
-        git log --format=%B -n 1 $GITHUB_SHA > commit_message.txt
+        git log --format=%B -n 1 $GITHUB_SHA -- > commit_message.txt
         echo "Automatic commit by $GITHUB_WORKFLOW" >> commit_message.txt
     - name: Commit and push to gh-pages
       run: |
