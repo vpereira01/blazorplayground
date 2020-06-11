@@ -42,6 +42,6 @@ jobs:
     - name: git things
       run: |
         cd gh-pages
-        mv ../wwwroot/* .
+        rsync -a ../wwwroot/ ./
         git commit -m "Add changes" -a
         git push
