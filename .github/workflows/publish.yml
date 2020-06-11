@@ -29,6 +29,8 @@ jobs:
       run: dotnet publish -c release -o . $GITHUB_SHA
     - name: Remove temp directory
       run: rm -r $GITHUB_SHA
+    - name: Move wwwroot files into root directory
+      run: mv wwwroot/* .
     - name: ls
       run: ls
     #- name: Push to gh-pages
