@@ -27,23 +27,20 @@ jobs:
         mv !($GITHUB_SHA) $GITHUB_SHA
     - name: Run publish
       run: dotnet publish -c release -o . $GITHUB_SHA
-    - name: Remove temp directory
-      run: rm -r $GITHUB_SHA
-    #- name: Move wwwroot files into root directory
-    #  run: mv wwwroot/* .
-    #- name: Remove extra files
-    #  run: rm -r web.config wwwroot
     - uses: actions/checkout@v2
       with:
         ref: gh-pages
         path: gh-pages
-    - name: ls
-      run: ls
-    - name: git things
+    - name: Update gh-pages working directory
+      run: rsync -a wwwroot/ gh-pages/
+    - name: Prepare commit message
+      run: |
+        git log --format=%B -n 1 $GITHUB_SHA > commit_message.txt
+        echo "Automatic commit by $GITHUB_WORKFLOW" >> commit_message.txt
+    - name: Commit and push to gh-pages
       run: |
         cd gh-pages
-        rsync -a ../wwwroot/ ./
         git config --global user.email "action@github.com"
-        git config --global user.name $GITHUB_EVENT_NAME
-        git commit -m "Add changes" -a
+        git config --global user.name "$GITHUB_WORKFLOW"
+        git commit -F ../commit_message.txt -a
         git push
