@@ -5,7 +5,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>blazorplayground</title>
-    <base href="/" />
+    <!-- Dynamic base-href to support GitHub pages -->
+    <script>
+        window['base-href'] = window.location.pathname;
+        console.log(window['base-href']);
+      </script>
     <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link href="css/app.css" rel="stylesheet" />
 </head>
